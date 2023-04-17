@@ -1,11 +1,34 @@
 import { TextInput, Text, View, TouchableOpacity, StyleSheet } from "react-native";
-import { getAuth, createUserWithNameAndPassword  } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword  } from 'firebase/auth'
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Cadastro (){
 
-    const CadastrarUsuario = () => {
-        
-        createUserWithNameAndPassword(auth, email, password)
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const navigation = useNavigation()
+    const auth = getAuth()
+
+    const CadastrarUsuario = async () => {
+
+        try {
+            const userCredencial = createUserWithEmailAndPassword(auth, email, senha)
+            const user = (await userCredencial).user
+
+            console.log(`${email} cadastrado com sucesso`)
+            navigation.navigate('Home')
+
+        } catch (error) {
+            
+            const errorCode = error.code
+            const errorMessage = error.message
+            
+            console.log('Erro na criação do usuário:', errorCode, errorMessage)
+     
+        }
+   
     
     }
 
@@ -17,18 +40,24 @@ export default function Cadastro (){
                 <TextInput
                 style={styles.TextInput}
                 placeholder="digite sua email"
+                onChangeText={setEmail}
+                value={email}
                 />
 
                 <TextInput
                 style={styles.TextInput}
                 placeholder="digite seu senha"
+                onChangeText={setSenha}
+                value={senha}
+                secureTextEntry
                 />
 
             </View>
 
+        <TouchableOpacity 
+        style={styles.button}
+        onPress={CadastrarUsuario}>
 
-
-        <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonFont}>
                 CADASTRAR
             </Text>
@@ -40,6 +69,7 @@ export default function Cadastro (){
     );
 
 }
+  
 
 const styles = StyleSheet.create({
 

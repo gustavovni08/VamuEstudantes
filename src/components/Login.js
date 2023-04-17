@@ -1,10 +1,36 @@
 import { TextInput, Text, View, TouchableOpacity, StyleSheet } from "react-native";
-import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Login (){
 
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const auth = getAuth()
+    const navigation = useNavigation() 
 
-    return(
+    const entrar = () => {
+        signInWithEmailAndPassword(auth, email, senha)
+          .then((userCredential) => {
+            const user = userCredential.user
+            console.log(`Usuário autenticado com sucesso: ${user.email}`)
+            navigation.navigate('MeusCartoes')
+
+          })
+          .catch((error) =>{
+            
+            navigation.navigate('Home')
+            const errorCode = error.code
+            const errorMessage = error.message
+            console.log(`Erro na autenticação: ${errorCode} - ${errorMessage}`)
+            
+          })
+    }
+
+
+    return(   
 
         <View style={styles.mainContainer}>
 
@@ -12,18 +38,25 @@ export default function Login (){
                 <TextInput
                 style={styles.TextInput}
                 placeholder="digite sua email"
+                onChangeText={setEmail}
+                value={email}
                 />
 
                 <TextInput
                 style={styles.TextInput}
                 placeholder="digite seu senha"
+                onChangeText={setSenha}
+                value={senha}
+                secureTextEntry
                 />
 
             </View>
 
 
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+        style={styles.button}
+        onPress={entrar}>
             <Text style={styles.buttonFont}>
                 LOGIN
             </Text>
