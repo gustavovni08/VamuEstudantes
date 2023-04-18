@@ -7,6 +7,8 @@ import Home from './src/components/home';
 import Login from './src/components/login';
 import Cadastro from './src/components/Cadastro';
 import MeusCartoes from './src/components/MeusCartoes';
+import AdicionarCartao from './src/components/AdicionarCartao';
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -43,7 +45,11 @@ export default function App() {
         component={Cadastro} />
 
         <Stack.Screen name="MeusCartoes" 
-        component={MeusCartoes} />
+        component={MeusCartoes} 
+        options={{ headerShown: false }}/>
+
+        <Stack.Screen name="AdcionarCartao" 
+        component={AdicionarCartao} />
 
       
       </Stack.Navigator>
