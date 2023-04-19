@@ -29,7 +29,7 @@ const firebaseConfig = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="MeusCartoes">
       
         <Stack.Screen name="Home" 
         component={Home}
