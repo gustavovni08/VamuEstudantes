@@ -17,6 +17,7 @@ export default function Cadastro (){
             const userCredencial = createUserWithEmailAndPassword(auth, email, senha)
             const user = (await userCredencial).user
 
+            window.alert(`${email} cadastrado com sucesso`)
             console.log(`${email} cadastrado com sucesso`)
             navigation.navigate('Home')
 
@@ -25,6 +26,7 @@ export default function Cadastro (){
             const errorCode = error.code
             const errorMessage = error.message
             
+            window.alert('Erro na criação do usuário:', errorCode, errorMessage)
             console.log('Erro na criação do usuário:', errorCode, errorMessage)
      
         }
@@ -76,9 +78,9 @@ const styles = StyleSheet.create({
     mainContainer: {
         
         flex: 1,
-        backgroundColor: '#2AAA8A',
+        backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
 
 
 
@@ -86,40 +88,52 @@ const styles = StyleSheet.create({
 
     TextInputContainer:{
 
-        flex:0.2,
+        flex: 0.37,
+        width:327.35,
         alignItems:"center",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
 
     },
 
     TextInput:{
 
         backgroundColor:'#fff',
-        width:122,
+        width:200,
         padding:6,
-        borderRadius: 5 
+        borderRadius: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 10,
+
 
     },
 
     buttonContainer:{
 
         alignItems:"center",
-        justifyContent: "space-evenly"
+        justifyContent: "center",
+        paddingBottom: 22,
 
     },
 
     button:{
 
-        backgroundColor:'#fff',
+        justifyContent:'center',
+        alignItems: 'center',
+        backgroundColor:'#2AAA8A',
         padding: 5,
         borderRadius: 5,
+        width:170,
+        height:45,
 
 
     },
 
     buttonFont:{
         fontWeight: "bold",
-        color: '#2AAA8A',
+        color: '#fff',
     },
 
 })

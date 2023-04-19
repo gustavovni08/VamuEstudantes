@@ -11,12 +11,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Provider } from 'react-redux';
-import { legacy_createStore } from "redux";
+import { createStore } from "redux";
 
 
 const Stack = createStackNavigator()
 
-const store = createStore()
+// const store = createStore()
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaZfGEtZNV9Z8O7cU8aejv-GJ4HMaN5OQ",
@@ -33,7 +33,7 @@ const firebaseConfig = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="MeusCartoes"
+      <Stack.Navigator initialRouteName="Home"
               screenOptions={{
                 headerStyle: {
                   backgroundColor: '#2AAA8A',
