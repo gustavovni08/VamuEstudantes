@@ -1,13 +1,23 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Cartao from "./Cartao";
 
+
 export default function MeusCartoes(){
+
+    const navigation = useNavigation()
+
+    const navegar = () =>{
+        navigation.navigate('AdcionarCartao')
+    }
 
     return(
     <View style={styles.mainContainer} >
         <Cartao/>
 
-        <TouchableOpacity style={styles.addCartaoButton}>
+        <TouchableOpacity 
+        style={styles.addCartaoButton}
+        onPress={navegar}>
             <Text style={styles.addCartaoButtonFont}>+</Text>
         </TouchableOpacity>
     </View>
