@@ -1,6 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
-
 import { initializeApp } from "firebase/app";
 
 import Home from './src/components/home';
@@ -13,8 +10,13 @@ import AdicionarCartao from './src/components/AdicionarCartao';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { Provider } from 'react-redux';
+import { legacy_createStore } from "redux";
+
+
 const Stack = createStackNavigator()
 
+const store = createStore()
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaZfGEtZNV9Z8O7cU8aejv-GJ4HMaN5OQ",
@@ -31,7 +33,14 @@ const firebaseConfig = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="MeusCartoes">
+      <Stack.Navigator initialRouteName="MeusCartoes"
+              screenOptions={{
+                headerStyle: {
+                  backgroundColor: '#2AAA8A',
+                },
+                headerTintColor: '#fff',
+              }}
+      >
       
         <Stack.Screen name="Home" 
         component={Home}
@@ -57,13 +66,5 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2AAA8A',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 
