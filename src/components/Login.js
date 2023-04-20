@@ -37,14 +37,14 @@ export default function Login (){
             <View style={styles.TextInputContainer}>
                 <TextInput
                 style={styles.TextInput}
-                placeholder="digite sua email"
+                placeholder="digite seu email"
                 onChangeText={setEmail}
                 value={email}
                 />
 
                 <TextInput
                 style={styles.TextInput}
-                placeholder="digite seu senha"
+                placeholder="digite sua senha"
                 onChangeText={setSenha}
                 value={senha}
                 secureTextEntry
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         
         flex: 1,
-        backgroundColor: '#2AAA8A',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
 
@@ -84,18 +84,24 @@ const styles = StyleSheet.create({
 
     TextInputContainer:{
 
-        flex:0.2,
+        flex: 0.37,
+        width:327.35,
         alignItems:"center",
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
 
     },
 
     TextInput:{
 
         backgroundColor:'#fff',
-        width:122,
+        width:200,
         padding:6,
-        borderRadius: 5 
+        borderRadius: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 10,
 
     },
 
@@ -108,16 +114,20 @@ const styles = StyleSheet.create({
 
     button:{
 
-        backgroundColor:'#fff',
+        backgroundColor: '#2AAA8A',
         padding: 5,
         borderRadius: 5,
+        width:170,
+        height:45,
+        justifyContent:'center',
+        alignItems: 'center',
 
 
     },
 
     buttonFont:{
         fontWeight: "bold",
-        color: '#2AAA8A',
+        color: '#fff',
     },
 
 })

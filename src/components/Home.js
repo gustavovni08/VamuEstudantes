@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         
         flex: 1,
-        backgroundColor: '#2AAA8A',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'space-evenly',
 
@@ -67,18 +67,18 @@ const styles = StyleSheet.create({
         height: 35.444,
         padding: 5,
         borderRadius: 7,
-        backgroundColor:'#fff',
+        backgroundColor:'#2AAA8A',
 
     },
 
     buttonFont:{
         fontWeight: "bold",
-        color: '#2AAA8A',
+        color: '#fff',
     },
 
     logo:{
-        width:250,
-        height:100,
+        width:500,
+        height:200,
     },
 
 })
