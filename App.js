@@ -11,12 +11,18 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { Provider } from 'react-redux';
-import { legacy_createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+
+import rootReducer from "./reducers/rootReducer";
 
 
 const Stack = createStackNavigator()
 
-const store = createStore()
+const store = configureStore({
+  reducer: rootReducer,
+})
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaZfGEtZNV9Z8O7cU8aejv-GJ4HMaN5OQ",
@@ -28,10 +34,12 @@ const firebaseConfig = {
   measurementId: "G-M55CEL8GPN"
 };
 
-  const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 export default function App() {
   return (
+
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MeusCartoes"
               screenOptions={{
@@ -63,6 +71,7 @@ export default function App() {
       
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 
