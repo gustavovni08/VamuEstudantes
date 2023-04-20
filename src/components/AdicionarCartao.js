@@ -3,9 +3,14 @@ import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 
+import { adcionarNomeCartao, adcionarNumeroCartao } from "../../reducers/cartaoSlice";
+
+
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AdicionarCartao (){
 
+    const dispatch = useDispatch();
     const navigator = useNavigation()
     const [nomeCartao, setNomeCartao] = useState('')
     const [numeroCartao, setNumeroCartao] = useState('')
@@ -15,11 +20,25 @@ export default function AdicionarCartao (){
         
         if(numeroCartao && nomeCartao){
             
-            if(numeroCartao.lenght !== 15){
+            if(numeroCartao.length!== 16){
                 window.alert('insira um numero de cartão válido')
                 console.log('insira um numero de cartão válido')
+                console.log(numeroCartao, numeroCartao.length)
             } else {
-                console.log(nomeCartao, numeroCartao)
+            
+                const cartaoCadastrado = {
+
+                    nome: nomeCartao,
+                    numero: numeroCartao,
+
+                }
+               
+                window.alert(`seu cartão foi registrado com sucesso!`)
+                dispatch(adcionarNomeCartao(cartaoCadastrado.nome))
+                dispatch(adcionarNumeroCartao(cartaoCadastrado.numero))
+
+
+                // console.log(nome, numero)
                 navigator.navigate('MeusCartoes')
             }
 
@@ -61,7 +80,7 @@ export default function AdicionarCartao (){
         style={styles.textInput}
         type={"custom"}
         options={{
-            mask: '99.99.9999999999-9'
+            mask: '99.99.99999999-9'
         }}/>
     
     </View>

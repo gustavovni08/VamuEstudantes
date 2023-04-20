@@ -1,15 +1,22 @@
 import { View, Text, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+
 
 export default function Cartao(){
+   
+   const nomeCartao = useSelector(state => state.cartao.nome)
+   const numeroCartao = useSelector(state => state.cartao.numero)
+   const quantidade = useSelector(state => state.cartao.quantidade)
+   
     return(
         <View style={styles.mainContainer}>
             <View style={styles.header}>
-                <Text style={styles.headerFont}> NOME DO CARTÃO </Text>
-                <Text style={styles.headerFont}> n° do cartao</Text>
+                <Text style={styles.headerFont}> {nomeCartao} </Text>
+                <Text style={styles.headerFont}> {numeroCartao} </Text>
             </View>
 
             <View style={styles.footer}>
-                <Text style={styles.footerFont}> N° DE PASSAGENS GRATUITAS </Text>
+                <Text style={styles.footerFont}> {quantidade} DE PASSAGENS GRATUITAS </Text>
             </View>
 
 

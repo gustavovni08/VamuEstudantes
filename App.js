@@ -41,7 +41,7 @@ export default function App() {
 
     <Provider store={store}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home"
+      <Stack.Navigator initialRouteName="AdcionarCartao"
               screenOptions={{
                 headerStyle: {
                   backgroundColor: '#2AAA8A',

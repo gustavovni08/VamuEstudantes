@@ -1,12 +1,16 @@
-import { createSlice, createAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartaoSlice = createSlice({
     name:'cartao',
-    initialState: { nome: "", numero:""},
+    initialState: { nome: "", numero:"", quantidade: 44 },
 
     reducers: {
-        adcionarNomeCartao: (state, cartao) => state.nome = cartao.nome, 
-        adcionarNumeroCartao: (state, cartao) => state.nome = cartao.nome,
+        adcionarNomeCartao: (state, action) => {
+            return {...state, nome: action.payload}
+        }, 
+        adcionarNumeroCartao: (state, action) => {
+            return {...state, numero: action.payload}
+        }
     }
 })
 
