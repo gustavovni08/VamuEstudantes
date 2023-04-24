@@ -3,17 +3,20 @@ import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 
-import { adcionarNomeCartao, adcionarNumeroCartao } from "../../reducers/cartaoSlice";
+import cartaoSlice, { adcionarNomeCartao, adcionarNumeroCartao } from "../../reducers/cartaoSlice";
+import listaDeCartoesSlice, {adicionarCartaoaLista} from "../../reducers/listaDeCartoesSlice";
 
 
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AdicionarCartao (){
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const navigator = useNavigation()
     const [nomeCartao, setNomeCartao] = useState('')
     const [numeroCartao, setNumeroCartao] = useState('')
+    const quantidade = useSelector(state => state.cartao.quantidade)
+    const listaDeCartoes = useSelector(state => state.listaDeCartoes.listaDeCartoes)
 
 
     const cadastrarCartao = () =>{
@@ -30,12 +33,18 @@ export default function AdicionarCartao (){
 
                     nome: nomeCartao,
                     numero: numeroCartao,
+                    quantidade: quantidade,
 
                 }
+
                
                 window.alert(`seu cartão foi registrado com sucesso!`)
+                
                 dispatch(adcionarNomeCartao(cartaoCadastrado.nome))
                 dispatch(adcionarNumeroCartao(cartaoCadastrado.numero))
+
+                dispatch(adicionarCartaoaLista(cartaoCadastrado))
+                console.log(listaDeCartoes)
 
 
                 // console.log(nome, numero)
@@ -50,8 +59,12 @@ export default function AdicionarCartao (){
             console.log('insira os dados do seu cartão')
         }
         
-    }
 
+        useEffect(() => {
+            console.log(listaDeCartoes)
+        }, [listaDeCartoes])
+
+    }
 
 
     return(
