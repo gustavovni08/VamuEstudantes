@@ -5,7 +5,7 @@ export const adcionarNumeroCartao = createAction('cartaoSlice/adcionarNumeroCart
 
 export const adicionarCartaoaLista = (novoCartao) => ({
     
-    type: 'ADICIONAR_CARTAO',
-    payload: {novoCartao},
+    type: 'listaDeCartoes/adicionarCartaoaLista',
+    payload: novoCartao,
 
 })

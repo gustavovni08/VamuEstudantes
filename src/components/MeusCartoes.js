@@ -1,19 +1,30 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import ListaDeCartoes from "./listaDeCartoes";
 import Cartao from "./Cartao";
 
 
 export default function MeusCartoes(){
 
+
     const navigation = useNavigation()
+    const listaDeCartoes = useSelector(state => state.listaDeCartoes)
 
     const navegar = () =>{
         navigation.navigate('AdcionarCartao')
     }
 
+    useEffect(()=>{
+        console.log(listaDeCartoes)
+    }, [listaDeCartoes])
+
+
     return(
     <View style={styles.mainContainer} >
-        <Cartao/>
+       
+        <ListaDeCartoes/>
 
         <TouchableOpacity 
         style={styles.addCartaoButton}

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 
 const listaDeCartoesSlice = createSlice({
     name: 'listaDeCartoes',
@@ -8,13 +7,13 @@ const listaDeCartoesSlice = createSlice({
     },
 
     reducers:{
-        adicionarCartaoaLista: (state = initialState, action) => {
+        adicionarCartaoaLista: (state, action) => {
          
             switch(action.type) {
             
-                case 'ADICIONAR_CARTAO':
+                case 'listaDeCartoes/adicionarCartaoaLista':
                     
-                    const novoCartao = action.payload.novoCartao
+                    const novoCartao = action.payload
 
                     return {
                         ...state,

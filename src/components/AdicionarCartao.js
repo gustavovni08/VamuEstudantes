@@ -1,10 +1,10 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import cartaoSlice, { adcionarNomeCartao, adcionarNumeroCartao } from "../../reducers/cartaoSlice";
-import listaDeCartoesSlice, {adicionarCartaoaLista} from "../../reducers/listaDeCartoesSlice";
+import listaDeCartoesSlice, {adicionarCartaoaLista, adicionarCartaoalista} from "../../reducers/listaDeCartoesSlice";
 
 
 import { useDispatch, useSelector } from "react-redux";
@@ -16,11 +16,20 @@ export default function AdicionarCartao (){
     const [nomeCartao, setNomeCartao] = useState('')
     const [numeroCartao, setNumeroCartao] = useState('')
     const quantidade = useSelector(state => state.cartao.quantidade)
-    const listaDeCartoes = useSelector(state => state.listaDeCartoes.listaDeCartoes)
+   
 
 
     const cadastrarCartao = () =>{
-        
+
+        const cartaoCadastrado = {
+
+            nome: nomeCartao,
+            numero: numeroCartao,
+            quantidade: quantidade,
+    
+        }
+
+
         if(numeroCartao && nomeCartao){
             
             if(numeroCartao.length!== 16){
@@ -28,14 +37,6 @@ export default function AdicionarCartao (){
                 console.log('insira um numero de cartão válido')
                 console.log(numeroCartao, numeroCartao.length)
             } else {
-            
-                const cartaoCadastrado = {
-
-                    nome: nomeCartao,
-                    numero: numeroCartao,
-                    quantidade: quantidade,
-
-                }
 
                
                 window.alert(`seu cartão foi registrado com sucesso!`)
@@ -44,7 +45,6 @@ export default function AdicionarCartao (){
                 dispatch(adcionarNumeroCartao(cartaoCadastrado.numero))
 
                 dispatch(adicionarCartaoaLista(cartaoCadastrado))
-                console.log(listaDeCartoes)
 
 
                 // console.log(nome, numero)
@@ -60,9 +60,6 @@ export default function AdicionarCartao (){
         }
         
 
-        useEffect(() => {
-            console.log(listaDeCartoes)
-        }, [listaDeCartoes])
 
     }
 
