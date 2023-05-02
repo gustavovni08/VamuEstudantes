@@ -9,15 +9,41 @@ import listaDeCartoesSlice, {adicionarCartaoaLista, adicionarCartaoalista} from 
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {doc, setDoc } from "firebase/firestore"
+import database from "../config/firebaseConfig";
+
+
 export default function AdicionarCartao (){
+
+    const auth = getAuth()
+    // const user = firebase.auth().currentUser; // obter usuário autenticado
+    
 
     const dispatch = useDispatch()
     const navigator = useNavigation()
+    
     const [nomeCartao, setNomeCartao] = useState('')
     const [numeroCartao, setNumeroCartao] = useState('')
     const quantidade = useSelector(state => state.cartao.quantidade)
-   
 
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // O usuário está autenticado, você pode acessar suas informações
+          const userdata = user.email
+          // Use as informações do usuário como quiser
+      
+            console.log(userdata)
+        } 
+      });
+      //Observe que a função onAuthStateChanged é chamada sempre que o estado de autenticação do usuário mudar, então você pode usar isso para atualizar a interface do usuário ou realizar outras ações apropriadas.
+      
+      
+      
+      
+      
+      
 
     const cadastrarCartao = () =>{
 

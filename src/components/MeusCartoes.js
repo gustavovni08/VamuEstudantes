@@ -1,24 +1,45 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import ListaDeCartoes from "./listaDeCartoes";
-import Cartao from "./Cartao";
 
+import { useSelector } from "react-redux";
+
+import { useState } from "react";
+import { useEffect } from "react";
+
+import {doc, getDoc, setDoc} from "firebase/firestore"
+
+import ListaDeCartoes from "./listaDeCartoes";
+import database from "../config/firebaseConfig";
 
 export default function MeusCartoes(){
 
 
     const navigation = useNavigation()
     const listaDeCartoes = useSelector(state => state.listaDeCartoes)
+    const [lista, setLista] = useState( [] )
 
     const navegar = () =>{
         navigation.navigate('AdcionarCartao')
     }
 
     useEffect(()=>{
-        console.log(listaDeCartoes)
-    }, [listaDeCartoes])
+
+        const usuarios = doc( database, 'usuarios', 'gustavovni08')
+
+        getDoc(usuarios).then((doc) =>{
+            if (doc.exists()) {
+                console.log("Dados do usuário:", doc.data());
+              } else {
+                console.log("O documento não existe.");
+              }
+            }).catch((error) => {
+              console.log("Erro ao obter os dados do usuário:", error);
+        })
+
+       
+
+
+        })
 
 
     return(
