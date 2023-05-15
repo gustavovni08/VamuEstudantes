@@ -1,7 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { TextInputMask } from 'react-native-masked-text';
 import { useNavigation } from "@react-navigation/native";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import cartaoSlice, { adcionarNomeCartao, adcionarNumeroCartao } from "../../reducers/cartaoSlice";
 import listaDeCartoesSlice, {adicionarCartaoaLista, adicionarCartaoalista} from "../../reducers/listaDeCartoesSlice";
@@ -9,15 +9,27 @@ import listaDeCartoesSlice, {adicionarCartaoaLista, adicionarCartaoalista} from 
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { getAuth } from "firebase/auth";
+import {doc, updateDoc, arrayUnion } from "firebase/firestore"
+import database from "../config/firebaseConfig";
+
+
 export default function AdicionarCartao (){
+
+    const auth = getAuth()
+    const user = auth.currentUser; // obter usuário autenticado
+    
 
     const dispatch = useDispatch()
     const navigator = useNavigation()
+    
     const [nomeCartao, setNomeCartao] = useState('')
     const [numeroCartao, setNumeroCartao] = useState('')
     const quantidade = useSelector(state => state.cartao.quantidade)
-   
 
+    const docRef = doc(database, 'usuarios', user.email )      
+      
+      
 
     const cadastrarCartao = () =>{
 
@@ -39,13 +51,20 @@ export default function AdicionarCartao (){
             } else {
 
                
-                window.alert(`seu cartão foi registrado com sucesso!`)
+               
                 
                 dispatch(adcionarNomeCartao(cartaoCadastrado.nome))
                 dispatch(adcionarNumeroCartao(cartaoCadastrado.numero))
 
                 dispatch(adicionarCartaoaLista(cartaoCadastrado))
 
+                updateDoc(docRef, { cartoes: arrayUnion(cartaoCadastrado) })
+                    .then(() => {
+                        window.alert(`seu cartão foi registrado com sucesso!`)
+                    })
+                    .catch((error) => {
+                        window.alert(`houve um erro: ${error}` )
+                    })
 
                 // console.log(nome, numero)
                 navigator.navigate('MeusCartoes')

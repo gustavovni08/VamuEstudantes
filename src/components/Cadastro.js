@@ -1,8 +1,11 @@
 import { TextInput, Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { getAuth, createUserWithEmailAndPassword  } from 'firebase/auth'
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { collection, doc, setDoc } from "@firebase/firestore";
 
+
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import database from "../config/firebaseConfig";
 
 export default function Cadastro (){
 
@@ -20,6 +23,9 @@ export default function Cadastro (){
             window.alert(`${email} cadastrado com sucesso`)
             console.log(`${email} cadastrado com sucesso`)
             navigation.navigate('Home')
+
+            const userRef = doc(database, 'usuarios', email)
+            setDoc(userRef, { cartoes: [] })
 
         } catch (error) {
             
