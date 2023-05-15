@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import ListaDeCartoes from "./listaDeCartoes";
-import Cartao from "./Cartao";
+import 'firebase/firestore'
 
 
 export default function MeusCartoes(){
